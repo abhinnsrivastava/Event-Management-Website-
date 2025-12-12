@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - UTSAV Events</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="loginPage">
+    <div class="login-box">
+        <h2>Login to UTSAV Events</h2>
+
+        <input id="lemail" type="email" placeholder="Enter your email">
+        <input id="lpass" type="password" placeholder="Enter your password">
+
+        <p id="loginMsg" class="error"></p>
+
+        <button class="btn" onclick="loginValidate()">Login</button>
+    </div>
+</div>
+
+<script>
+function loginValidate() {
+    let email = lemail.value.trim();
+    let pass = lpass.value.trim();
+
+    // Check empty fields
+    if (email === "" || pass === "") {
+        loginMsg.style.color = "red";
+        loginMsg.innerText = "All fields are required!";
+        return;
+    }
+
+    // Only allow @gmail.com users
+    if (!email.endsWith("@gmail.com")) {
+        loginMsg.style.color = "red";
+        loginMsg.innerText = "Error!";
+        return;
+    }
+
+    // Password validation
+    if (pass.length < 6) {
+        loginMsg.style.color = "red";
+        loginMsg.innerText = "Password must be at least 6 characters!";
+        return;
+    }
+
+    // SUCCESS
+    loginMsg.style.color = "green";
+    loginMsg.innerText = "Login Successful! Redirecting...";
+
+    setTimeout(() => {
+        window.location.href = "home.html";
+    }, 800);
+}
+</script>
+
+</body>
+</html>

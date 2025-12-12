@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking - UTSAV Events</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>UTSAV EVENTS</h1>
+    <p>Making Your Moments Memorable</p>
+</header>
+
+<nav>
+    <a href="home.html">Home</a>
+    <a href="events.html">Events</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="booking.html">Booking</a>
+    <a href="testimonials.html">Testimonials</a>
+</nav>
+
+<section>
+    <h2>Book Your Event</h2>
+
+    <input id="bname" type="text" placeholder="Your Name">
+    <input id="bemail" type="email" placeholder="Email Address">
+    <input id="bdate" type="date">
+    <textarea id="bdetails" placeholder="Event Details"></textarea>
+
+    <p id="bookMsg" class="error"></p>
+
+    <button class="btn" onclick="submitBooking()">Submit Booking</button>
+</section>
+
+<script>
+function submitBooking() {
+    // Get values
+    let name = document.getElementById("bname").value.trim();
+    let email = document.getElementById("bemail").value.trim();
+    let date = document.getElementById("bdate").value;
+    let details = document.getElementById("bdetails").value.trim();
+    let msg = document.getElementById("bookMsg");
+
+    // Reset message
+    msg.innerText = "";
+    msg.style.color = "red";
+
+    // Basic validations
+    if (name === "" || email === "" || date === "" || details === "") {
+        msg.innerText = "All fields are required!";
+        return;
+    }
+
+    // Email validation (basic)
+    if (!email.includes("@") || !email.includes(".")) {
+        msg.innerText = "Enter a valid email address!";
+        return;
+    }
+
+    // Date validation (cannot be in the past)
+    let today = new Date();
+    today.setHours(0, 0, 0, 0); // only compare dates
+    let selectedDate = new Date(date);
+
+    if (selectedDate < today) {
+        msg.innerText = "Please select a future date for the event!";
+        return;
+    }
+
+    // If you want only Gmail in booking too, uncomment this:
+    // if (!email.endsWith("@gmail.com")) {
+    //     msg.innerText = "Only @gmail.com emails are allowed for booking!";
+    //     return;
+    // }
+
+    // Success
+    msg.style.color = "green";
+    msg.innerText = "Booking submitted successfully! We will contact you soon.";
+
+    // Clear fields after success
+    document.getElementById("bname").value = "";
+    document.getElementById("bemail").value = "";
+    document.getElementById("bdate").value = "";
+    document.getElementById("bdetails").value = "";
+}
+</script>
+
+</body>
+</html>
+
+
+
